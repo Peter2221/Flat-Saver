@@ -3,13 +3,11 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { register, login } from '../../actions/authActions';
 
-const Register = ({ register, login }) => {
+const Register = (props, { register, auth: { isAuthenticated } }) => {
   useEffect(() => {
-    const user = {
-      email: "test12345@wp.pl",
-      password: "qwerty123"
+    if(isAuthenticated) {
+      props.history.push('/');
     }
-    login(user);
   }, []);
 
   return (
@@ -60,4 +58,10 @@ const formStyle = {
   marginTop: '4rem'
 }
 
-export default connect(null, { register, login })(Register);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  }
+};
+
+export default connect(mapStateToProps, { register, login })(Register);

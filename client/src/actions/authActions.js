@@ -3,14 +3,54 @@ import {
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
   LOGOUT,
+  LOADING,
   CLEAR_ERRORS
 } from '../utils/types';
 
-// funkcja która zwraca funckję przyjmującą jako argument dispatch
+export const setLoading = () => {
+  return async function(dispatch) {
+    dispatch({
+      type: LOADING
+    })
+  }
+}
+
+export const loadUser = () => {
+  return async function (dispatch){
+    setLoading();
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/api/v1/auth', {
+        headers: {
+          'x-auth-token': token
+        }
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) // or check for response.status
+        throw new Error(data.msg);
+
+      dispatch({
+        type: USER_LOADED,
+        payload: data
+      });
+    } catch(err) {
+      console.dir(err);
+      dispatch({
+        type: AUTH_ERROR,
+        payload: err.message
+      });
+    }
+  }
+}
 
 export const register = (user) => {
   return async function (dispatch) {
+    setLoading();
     try {
       const response = await fetch('http://localhost:5000/api/v1/users', {
         method: 'POST',
@@ -42,6 +82,7 @@ export const register = (user) => {
 
 export const login = (user) => {
   return async function (dispatch){
+    setLoading();
     try {
       const response = await fetch('http://localhost:5000/api/v1/auth', {
         method: 'POST',
