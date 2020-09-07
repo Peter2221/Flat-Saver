@@ -1,6 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 
-const Register = () => {
+import { connect } from 'react-redux';
+import { register, login } from '../../actions/authActions';
+
+const Register = ({ register, login }) => {
+  useEffect(() => {
+    const user = {
+      email: "test12345@wp.pl",
+      password: "qwerty123"
+    }
+    login(user);
+  }, []);
+
   return (
       <div style={formStyle} className="row grey lighten-5">
         <form className="col s12">
@@ -49,4 +60,4 @@ const formStyle = {
   marginTop: '4rem'
 }
 
-export default Register
+export default connect(null, { register, login })(Register);

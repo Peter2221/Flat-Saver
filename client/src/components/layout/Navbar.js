@@ -8,7 +8,7 @@ const Navbar = () => {
         <a href="#" className="brand-logo">FlatSaver</a>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
-            <Link to="/">Login</Link>
+            <Link to="/login">Login</Link>
           </li>
           <li>
             <Link to="/register">Register</Link>
