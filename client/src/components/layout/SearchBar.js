@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 const SearchBar = () => {
   return (
     <Fragment>
-      <nav style={{marginTop: '30px'}} className="blue lighten-2">
+      <nav style={{margin: '30px 0'}} className="blue lighten-2">
         <div className="nav-wrapper">
           <form>
             <div className="input-field">
