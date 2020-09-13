@@ -31,6 +31,13 @@ export default (state = initialState, action) => {
         flats: [action.payload, ...state.flats],
         loading: false
       }
+    case UPDATE_FLAT:
+      const updatedFlat = action.payload;
+      return {
+        ...state,
+        flats: state.flats.map(flat => flat._id === updatedFlat._id ? updatedFlat : flat),
+        loading: false
+      }
     case DELETE_FLAT:
       return {
         ...state,
@@ -42,6 +49,16 @@ export default (state = initialState, action) => {
         ...state,
         error: action.payload,
         loading: false
+      }
+    case SET_CURRENT:
+      return {
+        ...state,
+        current: action.payload
+      }
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null
       }
     case LOADING:
       return {

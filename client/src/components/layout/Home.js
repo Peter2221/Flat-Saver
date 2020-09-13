@@ -6,6 +6,7 @@ import SearchBar from './SearchBar';
 
 import AddFlatBtn from '../layout/AddFlatBtn';
 import AddFlatModal from '../flats/AddFlatModal';
+import EditFlatModal from '../flats/EditFlatModal';
 import FlatOfferList from '../flats/FlatOfferList';
 
 const Home = ({ loadUser }) => {
@@ -18,6 +19,7 @@ const Home = ({ loadUser }) => {
       <SearchBar />
       <FlatOfferList />
       <AddFlatModal />
+      <EditFlatModal />
       <AddFlatBtn />
     </Fragment>
   )

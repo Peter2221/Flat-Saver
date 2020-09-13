@@ -1,6 +1,11 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import M from 'materialize-css/dist/js/materialize.min.js';
 
-const FlatOfferListItem = ({ flat }) => {
+import { connect } from 'react-redux';
+import { deleteFlat, setCurrent } from '../../actions/flatActions';
+
+const FlatOfferListItem = ({ flat, deleteFlat, setCurrent }) => {
   const { flatname, url, description, address, price } = flat;
 
   const showLocation = () => {
@@ -10,9 +15,18 @@ const FlatOfferListItem = ({ flat }) => {
     window.open(mapsLink, "_blank"); 
   }
 
+  const delFlat = () => {
+    deleteFlat(flat._id);
+    M.toast({ html: "Flat has been deleted"});
+  }
+
+  const setCurrentFlat = () => {
+    setCurrent(flat);
+  }
+
   return (
     <div className="row">
-      <div className="col l12">
+      <div className="col12">
         <div className="card">
           <div className="card-content">
             <h4 className="card-title"> {flatname} </h4>
@@ -34,8 +48,8 @@ const FlatOfferListItem = ({ flat }) => {
           </div>
           <div className="card-action" style={cardAction}>
             <div>
-              <a className="btn-floating waves-effect waves-light blue" style={{marginRight: '5px'}}><i className="material-icons">edit</i></a>
-              <a className="btn-floating waves-effect waves-light red"><i className="material-icons">delete</i></a>
+              <a href="#edit-flat-modal" className="btn-floating waves-effect waves-light blue modal-trigger" onClick={setCurrentFlat} style={{marginRight: '5px'}}><i className="material-icons">edit</i></a>
+              <a className="btn-floating waves-effect waves-light red" onClick={delFlat}><i className="material-icons">delete</i></a>
             </div>
           </div>
         </div>
@@ -59,4 +73,10 @@ const cardAction = {
   justifyContent: 'flex-end'
 }
 
-export default FlatOfferListItem;
+FlatOfferListItem.propTypes = {
+  flat: PropTypes.object.isRequired,
+  deleteFlat: PropTypes.func.isRequired,
+  setCurrent: PropTypes.func.isRequired
+}
+
+export default connect(null, { deleteFlat, setCurrent })(FlatOfferListItem);
