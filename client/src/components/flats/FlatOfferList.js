@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getFlats } from '../../actions/flatActions';
 import PropTypes from 'prop-types';
 
+import Spinner from '../layout/Spinner';
 import FlatOfferListItem from './FlatOfferListItem';
 
 const FlatOfferList = ({ getFlats, flat: { flats, loading }}) => {
@@ -13,7 +14,12 @@ const FlatOfferList = ({ getFlats, flat: { flats, loading }}) => {
   return (
     <div>
       {
-        !loading && flats !== null && flats.map(flat => <FlatOfferListItem key={flat._id} flat={flat} />)
+        loading ? (
+          <Spinner />
+        ) : (
+          flats !== null && 
+          flats.map(flat => <FlatOfferListItem key={flat._id} flat={flat} />)
+        )
       }
     </div>
   )

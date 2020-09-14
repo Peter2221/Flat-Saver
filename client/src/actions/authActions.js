@@ -23,7 +23,7 @@ export const loadUser = () => {
     setLoading();
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/v1/auth', {
+      const response = await fetch('/api/v1/auth', {
         headers: {
           'x-auth-token': token
         }
@@ -52,7 +52,7 @@ export const register = (user) => {
   return async function (dispatch) {
     setLoading();
     try {
-      const response = await fetch('http://localhost:5000/api/v1/users', {
+      const response = await fetch('/api/v1/users', {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
@@ -84,7 +84,7 @@ export const login = (user) => {
   return async function (dispatch){
     setLoading();
     try {
-      const response = await fetch('http://localhost:5000/api/v1/auth', {
+      const response = await fetch('/api/v1/auth', {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {

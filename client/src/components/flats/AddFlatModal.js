@@ -14,7 +14,6 @@ const AddFlatModal = ({ addFlat }) => {
   });
 
   const onChange = e => {
-    console.log(e.target);
     setFlat({
       ...flat,
       [e.target.name]: e.target.value

@@ -61,6 +61,7 @@ export default (state = initialState, action) => {
         current: null
       }
     case LOADING:
+      console.log("LOADING REDUCER")
       return {
         ...state,
         loading: true

@@ -2,6 +2,7 @@ import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { loadUser } from '../../actions/authActions';
 import PropTypes from 'prop-types';
+
 import SearchBar from './SearchBar';
 
 import AddFlatBtn from '../layout/AddFlatBtn';

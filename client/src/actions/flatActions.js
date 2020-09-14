@@ -9,12 +9,10 @@ import {
   LOADING
 } from '../utils/types';
 
-export const setLoading = () => {
-  return function (dispatch) {
-    dispatch({
-      type: LOADING
-    })
-  }
+export const setLoading = (dispatch) => {
+  dispatch({
+    type: LOADING
+  })
 }
 
 export const setCurrent = (flat) => {
@@ -36,9 +34,9 @@ export const clearCurrent = () => {
 
 export const getFlats = () => {
   return async function (dispatch) {
-    setLoading();
+    setLoading(dispatch);
     try {
-      const response = await fetch('http://localhost:5000/api/v1/flats', {
+      const response = await fetch('/api/v1/flats', {
         method: 'GET',
         headers: {
           'x-auth-token': localStorage.getItem('token') 
@@ -68,9 +66,9 @@ export const getFlats = () => {
 
 export const addFlat = (flat) => {
   return async function(dispatch) {
-    setLoading();
+    setLoading(dispatch);
     try {
-      const response = await fetch('http://localhost:5000/api/v1/flats', {
+      const response = await fetch('/api/v1/flats', {
         method: 'POST',
         body: JSON.stringify(flat),
         headers: {
@@ -102,9 +100,9 @@ export const addFlat = (flat) => {
 export const updateFlat = (flat) => {
   return async function(dispatch) {
     const flatId = flat._id;
-    setLoading();
+    setLoading(dispatch);
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/flats/${flatId}`, {
+      const response = await fetch(`/api/v1/flats/${flatId}`, {
         method: 'PUT',
         body: JSON.stringify(flat),
         headers: {
@@ -135,9 +133,9 @@ export const updateFlat = (flat) => {
 
 export const deleteFlat = (id) => {
   return async function(dispatch) {
-    setLoading();
+    setLoading(dispatch);
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/flats/${id}`, {
+      const response = await fetch(`/api/v1/flats/${id}`, {
         method: 'DELETE',
         headers: {
           'x-auth-token': localStorage.getItem('token') 
